@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу | Эмиль и Анастасия</title>
+    
+    <!-- Подключение шрифтов Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Базовые настройки */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Настройка фона */
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #f4f0f7; 
+            
+            font-family: 'Lora', serif;
+            color: #3b2b3d; 
+            line-height: 1.6;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Контейнер для текста */
+        .invitation-card {
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            padding: 50px 40px;
+            /* Легкая подложка для читаемости текста на фоне цветов */
+            background: rgba(255, 255, 255, 0.45); 
+            backdrop-filter: blur(4px); 
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            
+            /* Плавное появление */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Типографика */
+        h1, h2, .names {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            color: #4a3b4c;
+        }
+
+        .greeting {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Стиль для динамического имени */
+        .guest-name {
+            font-family: 'Cormorant', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a3b4c;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .text-body {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-family: 'Cormorant', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 35px 0;
+            color: #4a3b4c;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            background-color: #9b8c9e;
+            margin: 30px auto;
+        }
+
+        /* Блок с датой и местом */
+        .details {
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .date {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .location {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .location-small {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+                background-attachment: scroll; /* Чтобы фон не дергался на iPhone */
+            }
+            .invitation-card {
+                padding: 30px 20px;
+                background: rgba(255, 255, 255, 0.55); 
+            }
+            .greeting { font-size: 1rem; }
+            .guest-name { font-size: 1.3rem; }
+            .text-body { font-size: 0.95rem; }
+            .signature { font-size: 1.4rem; }
+            .date { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card">
+        <!-- Блок приветствия с динамическим именем -->
+        <div class="greeting" id="guest-greeting">
+            Дорогие друзья и близкие!
+        </div>
+
+        <p class="text-body">
+            В этот важный для нас день мы хотим быть рядом с теми,<br>
+            кому обязаны теплом и поддержкой.
+        </p>
+        
+        <p class="text-body">
+            Приглашаем вас на нашу свадьбу<br>
+            и будем рады разделить с вами это событие.
+        </p>
+
+        <div class="signature">
+            С уважением и благодарностью,<br>
+            Эмиль и Анастасия!
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="details">
+            <div class="date">20.02.2027</div>
+            <div class="location">г. Санкт-Петербург</div>
+            <div class="location-small">
+                Дворец бракосочетания №2, Фурштатская 52<br>
+                Кирочный двор, Сиреневый зал, Кирочная 36Б
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипт для подстановки имен из ссылки -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('name');
+        
+        if (guestName) {
+            // Если имя есть в ссылке, выводим его красиво
+            document.getElementById('guest-greeting').innerHTML = 
+                ` <span class="guest-name">${guestName}!</span>`;
+        } else {
+            // Если ссылка без имени, выводим список родителей по умолчанию
+            document.getElementById('guest-greeting').innerHTML = 
+                `Дорогие родные и друзья!</span>`;
+        }
+    </script>
+
+</body>
+</html>
